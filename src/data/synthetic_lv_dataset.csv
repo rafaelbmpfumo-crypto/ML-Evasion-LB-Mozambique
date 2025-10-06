@@ -1,0 +1,48 @@
+import pandas as pd
+import numpy as np
+import os
+
+# --- Configuração de Reproducibilidade ---
+# Usamos a mesma seed (semente) do artigo para garantir que os dados sintéticos sejam os mesmos
+np.random.seed(42) 
+N = 500
+dropout_rate = 0.18
+n_dropout = int(N * dropout_rate)
+n_retention = N - n_dropout
+
+# Cria o diretório 'data' se ele não existir
+os.makedirs('data', exist_ok=True)
+
+print(f"Gerando Dataset Sintético (N={N})...")
+
+# --- Geração de Dados para a Classe Retenção (0) ---
+# Valores próximos às médias da Tabela 2 para a maioria dos alunos
+df_retention = pd.DataFrame({
+    'FET': np.clip(np.random.normal(68, 18, n_retention), 0, 100),
+    'DAP': np.clip(np.random.normal(11.5, 2.5, n_retention), 0, 20),
+    'TF': np.clip(np.random.poisson(4, n_retention), 0, 20),
+    'Dropout': 0
+})
+
+# --- Geração de Dados para a Classe Abandono (1) ---
+# Valores que refletem risco (FET e DAP mais baixos, TF mais alto)
+df_dropout = pd.DataFrame({
+    'FET': np.clip(np.random.normal(45, 15, n_dropout), 0, 100),
+    'DAP': np.clip(np.random.normal(7.0, 2.0, n_dropout), 0, 20),
+    'TF': np.clip(np.random.poisson(8, n_dropout), 0, 20),
+    'Dropout': 1
+})
+
+# --- Combinação, Embaralhamento e Salvamento ---
+# Combina os dois dataframes e embaralha (frac=1)
+df = pd.concat([df_retention, df_dropout]).sample(frac=1, random_state=42).reset_index(drop=True)
+
+# Salva o arquivo CSV com 500 linhas na pasta 'data'
+file_path = 'data/synthetic_lv_dataset.csv'
+df.to_csv(file_path, index=False)
+
+print("\nDataset Sintético Gerado e Salvo com Sucesso!")
+print(f"Arquivo: {file_path}")
+print(f"Total de Linhas: {len(df)}")
+print("\nPrimeiras 5 Linhas para Confirmação:")
+print(df.head())
