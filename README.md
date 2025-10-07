@@ -1,5 +1,3 @@
-# ML-Evasion-LB-Mozambique
-Código e dados sintéticos para o modelo de predição de abandono escolar em Moçambique, otimizado para baixa largura de banda.
 # Low-Connectivity Learning Analytics: Predictive Models for School Dropout Prevention in Mozambique
 
 Este repositório contém o código e os dados sintéticos para o artigo científico: **"Low-Connectivity Learning Analytics: Lightweight Predictive Models for School Dropout Prevention in Mozambique"**. O trabalho apresenta o modelo ML-Evasion-LB, otimizado para ambientes de baixa largura de banda e recursos limitados.
@@ -14,7 +12,7 @@ Este repositório contém o código e os dados sintéticos para o artigo cientí
 | **Revista Alvo** | JEDM - Journal of Educational Data Mining |
 | **Status Atual** | Em submissão (Under Review) |
 | **Link para o Artigo** | https://www.escritadahistoria.com/p/atribuicao-de-doi-nas-publicacoes.html |
-| **Autores** |Rafael Beto Mpfumo |
+| **Autores** | [Seu Nome Completo] |
 
 ---
 
